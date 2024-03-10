@@ -5,9 +5,13 @@ createApp({
     setup() {
         const product = ref('Boots')
         const image = ref('./assets/images/socks_green.jpg')
+        const inStock = ref(false)
+        const inventory = ref(0)
         return { 
             product, 
-            image
+            image,
+            inStock,
+            inventory
         }
     }  
 }).mount('#app')
