@@ -4,6 +4,7 @@ const {createApp, ref} = Vue
 createApp({
     setup() {
         const product = ref('Boots')
+        const brand = ref('SE 331')
         const image = ref('./assets/images/socks_green.jpg')
         const inStock = ref(false)
         const inventory = ref(100)
@@ -21,6 +22,8 @@ createApp({
             cart.value += 1
         }
 
+
+
         function updateImage(variantImage) {
             image.value = variantImage
         }
@@ -29,6 +32,7 @@ createApp({
 
         return { 
             product, 
+            brand,
             image,
             inStock,
             inventory,
