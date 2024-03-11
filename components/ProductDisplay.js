@@ -1,4 +1,5 @@
 const productDisplay = { 
+    emits: ['add-to-cart'],
     template: `<div class = "product-display">
     <div class = "produc-container">
         <div class = "product-image">
@@ -26,14 +27,7 @@ props: {
     premium: Boolean
 },
 
-setup(props) {
-    const shipping = computed(() => {
-        if (props.premium) {
-            return 'Free'
-        } else {
-            return 30
-        }
-    })
+setup(props,{emit}) {
     const product = ref('Boots')
     const brand = ref('SE 331')
     // const image = ref('./assets/images/socks_green.jpg')
@@ -50,12 +44,12 @@ setup(props) {
     ])
 
     const selectedVariant = ref(0)
-    const cart = ref(0)
+    const cart = ref([])
 
     const onSale = ref(true)
 
     function addToCart() {
-        cart.value += 1
+        emit('add-to-cart', variants.value[selectedVariant.value].id)
     }
 
     const title = computed(() => {
@@ -70,6 +64,9 @@ setup(props) {
         return variants.value[selectedVariant.value].quantity
     })
 
+    const shipping = computed(() => {
+        return props.premium ? 'Free' : 30;
+    });
 
     function updateImage(variantImage) {
         image.value = variantImage
