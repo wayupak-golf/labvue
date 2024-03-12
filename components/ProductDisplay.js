@@ -24,7 +24,7 @@ const productDisplay = {
     :class="{ disabledButton: !inStock }">Add To Cart</button>
 </div>
 <div>
-    <review-list v-if="reviews.length":reviews = "review"></review-list>
+    <review-list v-if="reviews.length" :reviews="reviews"></review-list>
     <review-form @review-submitted="addReview"></review-form>
 </div>`,
 props: {
@@ -50,7 +50,7 @@ setup(props,{emit}) {
 
     const selectedVariant = ref(0)
     const cart = ref([])
-
+    const reviews = ref([])
     const onSale = ref(true)
 
     function addToCart() {
@@ -82,10 +82,10 @@ setup(props,{emit}) {
     }
 
     function addReview(review) {
-        reviewform.value.push(review)
+        reviews.value.push(review)
     }
 
-    function onSubmited() {
+    function onSubmit() {
         if (form.name ===''|| form.review === '' || form.rating == nall) {
             alert('Review is incomplete. Please fill out every field.')
             return
@@ -120,7 +120,9 @@ setup(props,{emit}) {
         updateImage,
         updateVariant,
         shipping,
-        saleStatus
+        saleStatus,
+        addReview,
+        reviews
     }
 }  
 }

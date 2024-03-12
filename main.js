@@ -16,12 +16,10 @@ const app = createApp ({
     }  
 })
 
+app.component('product-display', productDisplay)
+
 app.component('review-form', reviewform);
 
 app.component('review-list', reviewList);
-
-app.component('product-display', productDisplay)
-
-
 
 app.mount('#app')
