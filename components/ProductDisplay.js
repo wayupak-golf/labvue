@@ -22,12 +22,17 @@ const productDisplay = {
     </div>
     <button class="button" :disabled="!inStock" @click="addToCart"
     :class="{ disabledButton: !inStock }">Add To Cart</button>
+</div>
+<div>
+    <review-list v-if="reviews.length":reviews = "review"></review-list>
+    <review-form @review-submitted="addReview"></review-form>
 </div>`,
 props: {
     premium: Boolean
 },
 
 setup(props,{emit}) {
+    const reviewform = ref([])
     const product = ref('Boots')
     const brand = ref('SE 331')
     // const image = ref('./assets/images/socks_green.jpg')
@@ -74,6 +79,22 @@ setup(props,{emit}) {
 
     function updateVariant(index) {
         selectedVariant.value = index;
+    }
+
+    function addReview(review) {
+        reviewform.value.push(review)
+    }
+
+    function onSubmited() {
+        if (form.name ===''|| form.review === '' || form.rating == nall) {
+            alert('Review is incomplete. Please fill out every field.')
+            return
+        }
+        const productReview = {
+            name: form.name,
+            review: form.review,
+            rating: form.rating
+        }
     }
 
     const saleStatus = computed(() => {
